@@ -63,4 +63,4 @@ services:
             - ./plex/transcode:/transcode
             - ./plex/data:/data
             - media:/external
-        network_mode: host
+        hostname: localhost
