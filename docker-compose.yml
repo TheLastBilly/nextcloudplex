@@ -1,0 +1,71 @@
+version: '2'
+
+volumes:
+    db:
+    nextcloud_install:
+    nextcloud_data:
+    portainer_data:
+    media:
+    
+services:
+    autoproxy:
+        image: thelastbilly/autoproxy
+        volumes: 
+            - "./config.json:/config.json"
+            - "./certs:/certs"
+            - "./logs:/logs"
+        ports:
+            - "80:80"
+            - "443:443"
+        restart: "always"
+        links:
+            - nextcloud
+            - plex
+            - portainer
+
+    db:
+        image: mariadb
+        command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+        restart: always
+        volumes:
+            - db:/var/lib/mysql
+        environment: 
+            - MYSQL_ROOT_PASSWORD=Sleep-Railing8-Copious
+            - MYSQL_PASSWORD=Sleep-Railing8-Copious
+            - MYSQL_DATABASE=nextcloud
+            - MYSQL_USER=nextcloud
+        
+    
+    nextcloud:
+        image: thelastbilly/nextcloudcontained:20.0.1
+        links:
+            - db
+        volumes:
+            - nextcloud_install:/nextcloud/
+            - nextcloud_data:/nextcloud/data
+            - ./nextcloud/config:/nextcloud/config
+            - media:/media
+        restart: always
+        environment:
+            - UID=1001
+            - GID=1001
+
+    plex:
+        image: plexinc/pms-docker
+        restart: always
+        environment:
+            - TZ=America/Toronto
+            - PLEX_UID=1001
+            - PLEX_GID=1001
+        volumes:
+            - ./plex/config:/config
+            - ./plex/transcode:/transcode
+            - ./plex/data:/data
+            - media:/media
+
+    portainer:
+        image: portainer/portainer-ce
+        restart: always
+        volumes: 
+            - /var/run/docker.sock:/var/run/docker.sock
+            - portainer_data:/data

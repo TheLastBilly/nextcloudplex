@@ -1,0 +1,18 @@
+{
+    "domain": "localhost",
+    "servers": 
+    [
+        {
+            "subdomain": "portainer",
+            "url": "http://portainer:9000/"
+        },
+        {
+            "subdomain": "nextcloud",
+            "url": "http://nextcloud/"
+        },
+        {
+            "subdomain": "plex",
+            "url": "http://plex:32400/"
+        }
+    ]
+}
