@@ -21,7 +21,6 @@ services:
         links:
             - nextcloud
             - plex
-            - portainer
 
     db:
         image: mariadb
