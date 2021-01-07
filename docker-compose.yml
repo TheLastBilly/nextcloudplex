@@ -30,8 +30,8 @@ services:
         volumes:
             - db:/var/lib/mysql
         environment: 
-            - MYSQL_ROOT_PASSWORD=Sleep-Railing8-Copious
-            - MYSQL_PASSWORD=Sleep-Railing8-Copious
+            - MYSQL_ROOT_PASSWORD=mypass
+            - MYSQL_PASSWORD=mypass
             - MYSQL_DATABASE=nextcloud
             - MYSQL_USER=nextcloud
         
@@ -62,10 +62,3 @@ services:
             - ./plex/transcode:/transcode
             - ./plex/data:/data
             - media:/media
-
-    portainer:
-        image: portainer/portainer-ce
-        restart: always
-        volumes: 
-            - /var/run/docker.sock:/var/run/docker.sock
-            - portainer_data:/data
