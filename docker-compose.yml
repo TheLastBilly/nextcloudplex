@@ -58,6 +58,7 @@ services:
             - TZ=America/Toronto
             - PLEX_UID=1001
             - PLEX_GID=1001
+            - PLEX_CLAIM=
         volumes:
             - ./plex/config:/config
             - ./plex/transcode:/transcode
