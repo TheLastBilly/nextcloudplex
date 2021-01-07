@@ -45,7 +45,7 @@ services:
             - nextcloud_install:/nextcloud/
             - nextcloud_data:/nextcloud/data
             - ./nextcloud/config:/nextcloud/config
-            - media:/nextcloud/external
+            - media:/external
         restart: always
         environment:
             - UID=1001
