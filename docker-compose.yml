@@ -21,6 +21,8 @@ services:
         links:
             - nextcloud
             - plex
+        environment: 
+            - AUTOPROXY_HOST=localhost
 
     db:
         image: mariadb
